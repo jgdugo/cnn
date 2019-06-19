@@ -56,11 +56,11 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 checkpointer = ModelCheckpoint(filepath="./model.{epoch:02d}-{acc:.2f}-{val_acc:.2f}.hdf5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False)
 
 # Fit the model
-history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=35, batch_size=64, callbacks=[checkpointer])
+history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=40, batch_size=128, callbacks=[checkpointer])
 #history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=10, batch_size=100)
 
 # Save model in file
-model.save("model_epoch_11.hdf5")
+model.save("model_epoch_12.hdf5")
 
 # Ploteo de loss y accuracy en el training y el subset de validacion
 # Loss = mse

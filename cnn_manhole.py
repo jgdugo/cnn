@@ -33,21 +33,21 @@ Y_test = np.append(np.zeros(int(len(testN)/60)),np.ones(int(len(testP)/60)))
 model = Sequential()
 model.add(Convolution2D(30, 5, 5, border_mode='valid', input_shape=(60, 80, 1), activation='relu'))
 model.add(Convolution2D(30, 5, 5, border_mode='valid', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(30, 5, 5, border_mode='valid', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(20, 3, 3, border_mode='valid', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(MaxPooling2D(pool_size=(2, 2)))
 model.add(Convolution2D(10, 3, 3, border_mode='valid', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(Flatten())
 model.add(Dense(150, init='uniform', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(Dense(50, init='uniform', activation='relu'))
-model.add(Dropout(0.2))
+model.add(Dropout(0.1))
 model.add(Dense(1, init='uniform', activation='sigmoid'))
 # Compile model
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
@@ -56,11 +56,11 @@ model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy']
 checkpointer = ModelCheckpoint(filepath="./model.{epoch:02d}-{acc:.2f}-{val_acc:.2f}.hdf5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False)
 
 # Fit the model
-history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=40, batch_size=128, callbacks=[checkpointer])
+history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=100, batch_size=32, callbacks=[checkpointer])
 #history = model.fit(X_train, Y_train, validation_data=(X_test, Y_test), nb_epoch=10, batch_size=100)
 
 # Save model in file
-model.save("model_epoch_12.hdf5")
+model.save("model_epoch_5.hdf5")
 
 # Ploteo de loss y accuracy en el training y el subset de validacion
 # Loss = mse
